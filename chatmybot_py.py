@@ -123,13 +123,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-# Commented out IPython magic to ensure Python compatibility.
-# %%writefile Chatmybot.py
-# # Your chatbot code goes here
-# print("This is my Chatmybot code!")
-# 
-#
-
-from google.colab import files
-files.download('Chatmybot.py')
 
