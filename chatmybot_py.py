@@ -1,6 +1,31 @@
+# Import necessary libraries
+import streamlit as st
+import fitz  # PyMuPDF
 
+def extract_pdf_content(pdf_path):
+    doc = fitz.open(pdf_path)
+    text = ""
+    images = []
 
-pip install streamlit PyMuPDF
+    for page_num in range(doc.page_count):
+        page = doc.load_page(page_num)
+        text += page.get_text("text")
+
+        for img in page.get_images(full=True):
+            xref = img[0]
+            base_image = doc.extract_image(xref)
+            images.append(base_image["image"])
+
+    return text, images
+
+def chatbot_response(user_input, pdf_text):
+    if user_input.lower() in pdf_text.lower():
+        return "Yes, I found that in the PDF!"
+    else:
+        return "Sorry, I couldn't find that in the PDF."
+
+# Your Streamlit or other chatbot code continues here...
+
 
 from google.colab import files
 
